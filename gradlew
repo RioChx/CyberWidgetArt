@@ -1,16 +1,26 @@
 #!/bin/sh
 
-# Gradle Wrapper script - standard from Gradle distribution
+#
+# Copyright © 2015-2021 the original authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-set -o errexit
-set -o nounset
-set -o pipefail
+##############################################################################
+# Gradle start up script for UN*X
+##############################################################################
 
-if [ "${DEBUG-}" = "true" ]; then
-    set -o xtrace
-fi
-
-# Resolve links ($0 may be a symlink)
+# Attempt to set APP_HOME
 PRG="$0"
 while [ -h "$PRG" ] ; do
     ls=`ls -ld "$PRG"`
@@ -18,22 +28,58 @@ while [ -h "$PRG" ] ; do
     if expr "$link" : '/.*' > /dev/null; then
         PRG="$link"
     else
-        PRG=`dirname "$PRG"`/"$link"
+        PRG=`dirname "$PRG"`"/$link"
     fi
 done
+SAVED="`pwd`"
+cd "`dirname \"$PRG\"`/" >/dev/null
+APP_HOME="`pwd -P`"
+cd "$SAVED" >/dev/null
 
-DIR=$(dirname "$PRG")
+APP_NAME="Gradle"
+APP_BASE_NAME=`basename "$0"`
 
-APP_HOME=$(cd "$DIR/.." > /dev/null || exit 1; pwd)
+# Add default JVM options here.
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
-# Use JAVA_HOME if set, otherwise use java from PATH
-if [ -n "${JAVA_HOME-}" ]; then
-    JAVA_EXEC="$JAVA_HOME/bin/java"
+# Use the maximum available, or set MAX_FD != -1 to use that value.
+MAX_FD="maximum"
+
+warn () {
+    echo "$*"
+} >&2
+
+die () {
+    echo
+    echo "$*"
+    echo
+    exit 1
+} >&2
+
+# OS specific support.
+darwin=false
+case "`uname`" in
+  Darwin* )
+    darwin=true
+    ;;
+esac
+
+CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
+
+# Determine the Java command to use to start the JVM.
+if [ -n "$JAVA_HOME" ] ; then
+    if [ -x "$JAVA_HOME/jre/sh/java" ] ; then
+        JAVACMD="$JAVA_HOME/jre/sh/java"
+    else
+        JAVACMD="$JAVA_HOME/bin/java"
+    fi
+    if [ ! -x "$JAVACMD" ] ; then
+        die "ERROR: JAVA_HOME is set to an invalid directory: $JAVA_HOME"
+    fi
 else
-    JAVA_EXEC="java"
+    JAVACMD="java"
+    which java >/dev/null 2>&1 || die "ERROR: JAVA_HOME is not set and no 'java' command found"
 fi
 
-exec "$JAVA_EXEC" \
-  -Dorg.gradle.appname=gradlew \
-  -classpath "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" \
-  org.gradle.wrapper.GradleWrapperMain "$@"
+# Launch
+exec "$JAVACMD" $DEFAULT_JVM_OPTS -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
