@@ -31,7 +31,9 @@ jobs:
         run: find . -type f -name "AndroidManifest.xml" -print || echo "No AndroidManifest.xml files found"
 
       - name: Check and specify expected AndroidManifest.xml path
-        run: echo "Expected manifest path that Gradle uses: $PWD/app/src/main/AndroidManifest.xml" && ls -l $PWD/app/src/main/AndroidManifest.xml && echo "File found" || echo "File not found at expected path"
+        run: |
+          echo "Expected manifest path that Gradle uses: $PWD/app/src/main/AndroidManifest.xml"
+          ls -l $PWD/app/src/main/AndroidManifest.xml && echo "File found" || echo "File not found at expected path"
 
       - name: Build Debug APK
         run: ./gradlew assembleDebug
