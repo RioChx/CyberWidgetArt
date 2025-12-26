@@ -1,0 +1,2 @@
+- name: Show project structure
+  run: tree -L 3  # Or find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g' if tree not available
