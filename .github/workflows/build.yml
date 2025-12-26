@@ -25,6 +25,9 @@ jobs:
       - name: Show project structure (for debugging)
         run: find . -type f | sed -e 's;[^/]*/;|____;g;s;____|; |;g'
 
+      - name: Find all AndroidManifest.xml files and their paths
+        run: find . -type f -name "AndroidManifest.xml" -print
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug
 
