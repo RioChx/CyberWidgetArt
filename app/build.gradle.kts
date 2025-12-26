@@ -24,18 +24,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11  // Safe for Android 13
+        sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
     kotlin {
-        jvmToolchain(11)  // Matches Java 11 for compatibility
+        jvmToolchain(11)
     }
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.9.0")  // Compatible versions
+    implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.8.0")
+    implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
 
     testImplementation("junit:junit:4.13.2")
